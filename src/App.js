@@ -1,27 +1,23 @@
-import React, { useEffect, useState } from "react";
-import logo from './logo.svg';
-import axios from "axios";
+import React, { useState } from "react";
 import CardInputs from './CardInputs';
 import CardClimate from './CardClimate';
-
-// axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8';
-// axios.defaults.headers['Access-Control-Allow-Origin'] = '*';
+import { Row, Col } from "reactstrap";
 
 function App() {
   const [lat, setLat] = useState();
   const [lon, setLon] = useState();
   const [loading, setLoading] = useState(false);
 
-  console.log("loading no app", loading);
-
-  // useEffect(()=>{
-  //   setLoading(true)
-  // }, [loading])
-
   return (
     <div className="App">
-      <CardInputs lat={lat} setLat={setLat} lon={lon} setLon={setLon} loading={loading} setLoading={setLoading}/>
-      <CardClimate lat={lat} setLat={setLat} lon={lon} setLon={setLon} loading={loading} setLoading={setLoading}/>
+      <Row class="row" style={{padding: "100px"}}>
+        <Col class="col-6">
+          <CardInputs lat={lat} setLat={setLat} lon={lon} setLon={setLon} loading={loading} setLoading={setLoading}/>
+        </Col>
+        <Col class="col-6">
+          <CardClimate lat={lat} setLat={setLat} lon={lon} setLon={setLon} loading={loading} setLoading={setLoading}/>
+        </Col>
+      </Row>
     </div>
   );
 }

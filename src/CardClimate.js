@@ -1,42 +1,31 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {
-  CardBody, 
-  Row, Col, Card, Spinner, CardHeader
-} from "reactstrap";
+import { CardBody, Card, CardHeader } from "reactstrap";
 
-// const baseURL = "https://weather.contrateumdev.com.br/api/weather";
+axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8';
+axios.defaults.headers['Access-Control-Allow-Origin'] = '*';
 
-axios.defaults.baseURL = "https://weather.contrateumdev.com.br/api/weather";
-
-
-const CardClimate = ({ lat, lon, loading, setLoading }) => {
-
-  console.log("loading no climate", loading);
-  console.log(lat);
-  console.log(lon);
+const CardClimate = ({ lat, lon, setLoading }) => {
   const [district, setDistrict] = useState();
-
+  const [temp, setTemp] = useState();
+  const [description, setDescription] = useState();
+  const [humidity, setHumididy] =useState();
 
   useEffect(()=>{
-    axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8';
-    axios.defaults.headers['Access-Control-Allow-Origin'] = '*';
-
-    axios.get("",{params: {
+    setLoading(false)
+    axios.get("https://weather.contrateumdev.com.br/api/weather",{params: {
       lat: lat,
       lon: lon,
-      format: "jsonv2"
     }})
     .then(response => {
-      console.log(response);
-      console.log(response.data.name);
       setDistrict(response.data.name)
-      setLoading(false)
+      setTemp(response.data.main.temp)
+      setDescription(response.data.weather[0].description)
+      setHumididy(response.data.main.humidity)
     })
     .catch(err => {
       console.log(err);
       setLoading(false)
-
     })
  
   }, [lat]);
@@ -45,13 +34,21 @@ const CardClimate = ({ lat, lon, loading, setLoading }) => {
     <div>
       <Card>
         <CardHeader>
-          Voce está no bairro {district}
+          <h3>
+            Clima
+          </h3>
         </CardHeader>
+        <CardBody>
+          <h2>
+              A temperatura em {district} é de {temp}º, com humidade de {humidity}%
+          </h2>
+          <h3>
+            {description}
+          </h3>
+        </CardBody>
       </Card>
     </div>
   );
 }
 
 export default CardClimate;
-
-
