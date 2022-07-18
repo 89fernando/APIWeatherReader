@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import CardInputs from './CardInputs';
 import CardClimate from './CardClimate';
 import { Row, Col } from "reactstrap";
+import './Style.css'
 
 function App() {
   const [lat, setLat] = useState();
@@ -10,14 +11,21 @@ function App() {
 
   return (
     <div className="App">
-      <Row class="row" style={{padding: "100px"}}>
-        <Col class="col-6">
-          <CardInputs lat={lat} setLat={setLat} lon={lon} setLon={setLon} loading={loading} setLoading={setLoading}/>
-        </Col>
-        <Col class="col-6">
-          <CardClimate lat={lat} setLat={setLat} lon={lon} setLon={setLon} loading={loading} setLoading={setLoading}/>
-        </Col>
-      </Row>
+      <div className="divApp">
+        <Row class="col-12 appRow">
+          <h1 className="appRow">
+            CLIMA E PREVISÃO DO TEMPO
+          </h1>
+        </Row>
+        <Row>
+          <Col class="col-6">
+            <CardInputs lat={lat} setLat={setLat} lon={lon} setLon={setLon} loading={loading} setLoading={setLoading}/>
+          </Col>
+          <Col class="col-6">
+            <CardClimate lat={lat} setLat={setLat} lon={lon} setLon={setLon} loading={loading} setLoading={setLoading}/>
+          </Col>
+        </Row>
+      </div>
     </div>
   );
 }

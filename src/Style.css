@@ -1,0 +1,59 @@
+/* APP */
+
+.divApp {
+  padding: 80px;
+}
+
+.appRow {
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+/* CLIMATE */
+
+.cardClimate {
+  min-height: 284px;
+}
+
+.bodyClimate {
+  text-align: center;
+}
+
+.divTemp {
+  display: flex;
+  align-items: center;
+  
+}
+.h3TempText {
+  margin-right: 8px;
+}
+
+.h3Temp {
+  font-size: 30px;
+  color: blue;
+}
+
+.h2Feels {
+  margin-top: 7px;
+}
+.h2FellsDescription {
+  margin-top: 8px;
+}
+
+.spinnerCard{
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+}
+
+/* INPUTS */
+
+.bodyInputs {
+  min-height: 223px;
+}
+
+.inputForm {
+  width: 167px;
+  height: 30px;
+  font-size: 15px;
+}

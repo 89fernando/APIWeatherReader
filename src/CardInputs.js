@@ -4,9 +4,9 @@ import {
   Button, FormGroup, Input, Label, Card, 
   Col, Row, CardBody, CardHeader,
 } from "reactstrap";
+import './Style.css'
 
-
-const CardInputs = ({ setLat,  setLon, loading, setLoading }) => {
+const CardInputs = ({ setLat,  setLon }) => {
   const [street, setStreet] = useState()
   const [city, setCity] = useState()
   const [state, setState] = useState()
@@ -15,21 +15,19 @@ const CardInputs = ({ setLat,  setLon, loading, setLoading }) => {
     <div>
       <Card>
         <CardHeader>
-          <h3>Inputs</h3>
+          <h3>Endereço</h3>
         </CardHeader>
-        <CardBody>
-          <Row>
-            <Row style={{display: "flex"}}>
-              <Col>
-                <Label>
-                  Rua
-                </Label>
-              </Col>
-              <Col>
-                <FormGroup>
+        <CardBody className="bodyInputs">
+          <Row className="flex">
+            <Col>
+              <Label>
+                Rua:
+              </Label>
+            </Col>
+            <Col>
+              <FormGroup>
                 <Input
-                  style={{width:"167px", height:"30px", fontSize:"15px"}}
-                  // type="number"
+                  className="inputForm"
                   required 
                   name="street"
                   id="street"
@@ -39,20 +37,19 @@ const CardInputs = ({ setLat,  setLon, loading, setLoading }) => {
                     setStreet(e.target.value)
                   }} 
                 />
-                </FormGroup>
-              </Col>
-            </Row>
-            <Row style={{display: "flex"}}>
-              <Col>
-                <Label>
-                  Cidade
-                </Label>
-              </Col>
-              <Col>
-                <FormGroup>
+              </FormGroup>
+            </Col>
+          </Row>
+          <Row className="flex">
+            <Col>
+              <Label>
+                Cidade:
+              </Label>
+            </Col>
+            <Col>
+              <FormGroup>
                 <Input
-                  style={{width:"167px", height:"30px", fontSize:"15px"}}
-                  // type="number"
+                  className="inputForm"
                   required 
                   name="city"
                   id="city"
@@ -62,20 +59,19 @@ const CardInputs = ({ setLat,  setLon, loading, setLoading }) => {
                     setCity(e.target.value)
                   }} 
                 />
-                </FormGroup>
-              </Col>
-            </Row> 
-            <Row style={{display: "flex"}}>
-              <Col>
-                <Label>
-                  Estado
-                </Label>
-              </Col>
-              <Col>
-                <FormGroup>
+              </FormGroup>
+            </Col>
+          </Row> 
+          <Row className="flex">
+            <Col>
+              <Label>
+                Estado:
+              </Label>
+            </Col>
+            <Col>
+              <FormGroup>
                 <Input
-                  style={{width:"167px", height:"30px", fontSize:"15px"}}
-                  // type="number"
+                  className="inputForm"
                   required 
                   name="state"
                   id="state"
@@ -85,36 +81,32 @@ const CardInputs = ({ setLat,  setLon, loading, setLoading }) => {
                     setState(e.target.value)
                   }} 
                 />
-                </FormGroup>
-              </Col>
-            </Row> 
-            <Button
-              type="submit"
-              color="primary"
-              onClick={(e) => {
-                e.preventDefault();
+              </FormGroup>
+            </Col>
+          </Row> 
+          <Button
+            type="submit"
+            color="primary"
+            onClick={(e) => {
+              e.preventDefault();
 
-                axios.get("https://nominatim.openstreetmap.org/search", {params: {
-                  street:street,
-                  city:city,
-                  state:state,
-                  format: "jsonv2"
-                }})
-                .then(response => {
-                  console.log(response);
-                  console.log(response.data);
-                  setLat(response.data[0].lat)
-                  setLon(response.data[0].lon)
-                  setLoading(true)
-                })
-                .catch(err => {
-                  console.log(err);
-                })
-              }}
-            >
-              Enviar
-            </Button>    
-          </Row>
+              axios.get("https://nominatim.openstreetmap.org/search", {params: {
+                street:street,
+                city:city,
+                state:state,
+                format: "jsonv2"
+              }})
+              .then(response => {
+                setLat(response.data[0].lat)
+                setLon(response.data[0].lon)
+              })
+              .catch(err => {
+                console.log(err);
+              })
+            }}
+          >
+            Enviar
+          </Button>    
         </CardBody>
       </Card>
     </div>
